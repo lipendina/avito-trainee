@@ -27,7 +27,7 @@ func NewMessageServiceAPI(api storage.StorageAPI) MessageServiceAPI {
 	return &messageService{
 		storage: api,
 		ctx: context.Background(),
-		log: log.New(os.Stdout, "MESSAGE-SERVICE", log.LstdFlags),
+		log: log.New(os.Stdout, "MESSAGE-SERVICE: ", log.LstdFlags),
 	}
 }
 

@@ -13,6 +13,10 @@ type Message struct {
 	CreatedAt float64
 }
 
+func (r Message) String() string {
+	return fmt.Sprintf("messageID: %s, chatID: %s, authorID: %s, text: %s, createdAt: %f", r.ID, r.Chat, r.Author, r.Text, r.CreatedAt)
+}
+
 type SendMessageRequest struct {
 	Chat   uuid.UUID `json: "chat"`
 	Author uuid.UUID `json: "author"`
@@ -44,5 +48,5 @@ type MessageListResponse struct {
 }
 
 func (r MessageListResponse) String() string {
-	return fmt.Sprintf("{messages: %s}", r.MessageList)
+	return fmt.Sprintf("{messages: %v}", r.MessageList)
 }

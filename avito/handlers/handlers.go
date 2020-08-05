@@ -55,7 +55,7 @@ func (h *handlers) AddNewUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := &dto.CreateUserResponse{ID: userID}
-	h.log.Printf("Send response: %s", response)
+	h.log.Printf("Send response: %v", response)
 	sendResponse(http.StatusOK, response, w)
 }
 
@@ -101,6 +101,7 @@ func (h *handlers) SendMessageHandler(w http.ResponseWriter, r *http.Request) {
 		sendResponse(http.StatusBadRequest, response, w)
 		return
 	}
+	h.log.Printf("Received sendMessageRequest: %s", sendMessageRequest)
 
 	messageID, err, isInternal := h.service.GetMessageService().SendMessage(sendMessageRequest)
 	if err != nil {
@@ -111,7 +112,7 @@ func (h *handlers) SendMessageHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := &dto.SendMessageResponse{ID: messageID}
-	h.log.Printf("Send request: %s", sendMessageRequest)
+	h.log.Printf("Send request: %v", sendMessageRequest)
 	sendResponse(http.StatusOK, response, w)
 }
 
@@ -158,6 +159,7 @@ func (h *handlers) GetMessageListHandler(w http.ResponseWriter, r *http.Request)
 		sendResponse(http.StatusBadRequest, response, w)
 		return
 	}
+	h.log.Printf("Received messageListRequest: %s", messageListRequest)
 
 	messages, err, isInternal := h.service.GetMessageService().GetMessageList(messageListRequest)
 	if err != nil {
@@ -168,7 +170,7 @@ func (h *handlers) GetMessageListHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	response := &dto.MessageListResponse{MessageList: messages}
-	h.log.Printf("Send response: %s", response)
+	h.log.Printf("Send response: %v", response)
 	sendResponse(http.StatusOK, response, w)
 }
 
